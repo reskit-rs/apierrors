@@ -1,0 +1,43 @@
+[package]
+name = "reskit-apierrors"
+version = "0.1.0"
+authors = ["yflau <yfliu-xjtu@qq.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = ["verbose", "serde"]
+pvlost = ["reskit-apierrors-derive/pvlost"]
+verbose = []
+serde = ["serde_qs", "serde_crate", "serde_json", "serde_urlencoded", "url/serde"]
+
+[dependencies]
+thiserror = "1.0"
+anyhow = "1.0"
+http-types = "2.10.0"
+url = "2.1.1"
+lazy_static = "1.4.0"
+linkme = "0.2"
+shadow-rs = "0.5"
+
+# features: serde
+serde_json = { version = "1.0.51", optional = true }
+serde_crate = { version = "1.0.106", features = ["derive"], optional = true, package = "serde" }
+serde_urlencoded = { version = "0.7.0", optional = true}
+serde_qs = { version = "0.7.0", optional = true }
+
+# local dependencies temporarily
+reskit-utils = { path = "../utils" }
+reskit-apierrors-derive = { path = "derive" }
+
+[dev-dependencies]
+trybuild = "1.0"
+
+[build-dependencies]
+shadow-rs = "0.5"
+
+[workspace]
+members = [
+  "derive",
+]
